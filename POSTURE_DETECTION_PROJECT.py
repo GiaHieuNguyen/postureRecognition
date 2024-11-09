@@ -67,7 +67,7 @@ while cap.isOpened():
         
         cv2.putText(frame, f"Press Q to quit", (10, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.6, red, 2)
         # Set posture feedback based on thresholds
-        if neck_inclination < 118 and neck_inclination > 106 and torso_inclination < 85 and torso_inclination >80:
+        if neck_inclination < 117 and neck_inclination > 106 and torso_inclination < 85 and torso_inclination >80:
             good_frames += 1
             bad_frames = 0
             cv2.putText(frame, f"Good Posture", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, green, 2)
