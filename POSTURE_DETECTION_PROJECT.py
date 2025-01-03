@@ -6,6 +6,7 @@ from tkinter import messagebox, ttk
 import json
 import matplotlib.pyplot as plt
 from datetime import datetime
+import winsound
 
 # Initialize Mediapipe Pose class and drawing utilities
 mp_pose = mp.solutions.pose
@@ -33,8 +34,9 @@ def findAngle(x1, y1, x2, y2):
 
 # Function to send alert for bad posture
 def sendWarning(frame):
-    cv2.putText(frame, "Warning: Bad posture detected!", (150, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.6, yellow, 2)
+    cv2.putText(frame, "Warning: Bad posture detected!", (150, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.6, red, 2)
     print("Warning: Bad posture detected! Please adjust your posture.")
+    winsound.Beep(1000, 500)
 
 # Function to save session data
 def save_session_data(duration, good_percentage):
@@ -218,8 +220,9 @@ def start_posture_recognition():
         cv2.imshow("Posture Detection (Beta)", frame)
 
         # Exit on 'e' key
-        if cv2.waitKey(5) & 0xFF == ord('e'):
-            break
+        if cv2.waitKey(5) & 0xFF == ord('e') or cv2.waitKey(5) & 0xFF == ord('E'):
+         break
+
 
     cap.release()
     cv2.destroyAllWindows()
@@ -245,7 +248,8 @@ def display_instructions():
         "1. Position yourself in front of the camera.\n"
         "2. Maintain good posture to score points.\n"
         "3. Stay within the frame and avoid being too close to the camera.\n"
-        "4. Press 'E' to exit the session."
+        "4. Press 'E' to exit the session.\n"
+        "5. Review your previous sessions by clicking 'History' button."
     )
 
 # Function to quit the program
